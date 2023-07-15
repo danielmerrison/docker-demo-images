@@ -9,10 +9,12 @@ on:
     branches: ["main", "feature/initial-setup"]
     paths:
     - 'nginx/**'
+    - '.github/workflows/nginx.yml'
   pull_request:
     branches: ["main"]
     paths:
-      - 'nginx/**'
+    - 'nginx/**'
+    - '.github/workflows/nginx.yml'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -53,6 +55,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          working-directory: ./nginx
           context: .
           file: ./Dockerfile
           push: true
